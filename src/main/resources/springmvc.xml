@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="  
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd  
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd  
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 启动SpringMVC Controller的注解功能 -->
+	<context:component-scan base-package="com.hiynn.shiro.controller" />
+
+	<!-- 默认的注解映射的支持 -->
+	<mvc:annotation-driven />
+
+	<!-- <mvc:view-controller path="/" view-name="index" /> -->
+	
+	<!-- 配置视图解析器   直接把资源位置定位到项目的/WEB-INF/下面 ,为controller返回的String添加前后缀，跳转页面-->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 配置静态资源映射 -->
+	<mvc:resources mapping="/js/**" location="/js/" />
+	
+	<!-- 实现Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- 开启shiro注解模式 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">  <!-- 指定前置依赖对象,前置依赖在bean实例化之前创建好 -->
+		<!-- 开启aop，对类代理 -->
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	
+	<!-- 捕获权限控制异常 -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 授权异常（包括权限不足、不是指定用户等） -->
+				<prop key="org.apache.shiro.authz.UnauthorizedException">
+					unauthorized
+				</prop>
+				<!-- 认证异常（未登录或登录失效） -->
+				<prop key="org.apache.shiro.authz.UnauthenticatedException">
+					index
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

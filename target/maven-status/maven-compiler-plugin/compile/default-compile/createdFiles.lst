@@ -1,0 +1,9 @@
+com\hiynn\shiro\pojo\Permission.class
+com\hiynn\shiro\realm\UserRealm.class
+com\hiynn\shiro\pojo\Role.class
+com\hiynn\shiro\mapper\UserMapper.class
+com\hiynn\shiro\filter\CustomRolesAuthorizationFilter.class
+com\hiynn\shiro\pojo\User.class
+com\hiynn\shiro\controller\IndexController.class
+com\hiynn\shiro\controller\UserController.class
+com\hiynn\shiro\service\UserService.class

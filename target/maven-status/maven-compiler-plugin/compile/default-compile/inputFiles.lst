@@ -1,0 +1,9 @@
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\mapper\UserMapper.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\pojo\User.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\service\UserService.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\controller\IndexController.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\controller\UserController.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\pojo\Permission.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\filter\CustomRolesAuthorizationFilter.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\pojo\Role.java
+C:\workspace\ShiroSpring\src\main\java\com\hiynn\shiro\realm\UserRealm.java
